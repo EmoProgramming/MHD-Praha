@@ -1,0 +1,21 @@
+2026-05-06 16:58:52
+
+FILE stops.txt
+-has stops sorted by stop_id
+-has additional information about stop (its location: lan + lon)
+
+FILE route_stops.txt
+-for every route of some city public transport there are its stops with stop_id
+
+
+data.py
+-reads all tram routes
+-find stops from routes in stops.txt file
+-stops.txt is sorted by stop_id
+-stop_id is made from "U" + number of stop + "Z" + number of platform of that stop + "P" (not always)
+-iterate through all stops and append to list
+-then use binary search to find stop
+-122 - 1720 => are numbers of lines where all stops of trams are,so there are 
+1599 tram stops
+-first test passed  
+
