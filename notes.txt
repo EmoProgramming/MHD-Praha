@@ -1,4 +1,4 @@
-2026-05-06 16:58:52
+2026-05-06 16:58:52 START
 
 FILE stops.txt
 -has stops sorted by stop_id
@@ -18,4 +18,9 @@ data.py
 -122 - 1720 => are numbers of lines where all stops of trams are,so there are 
 1599 tram stops
 -first test passed  
+
+2026-05-06 17:30:06 STOP
+
+2026-05-06 18:14:26 START
+
 
