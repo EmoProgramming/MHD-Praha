@@ -22,5 +22,16 @@ data.py
 2026-05-06 17:30:06 STOP
 
 2026-05-06 18:14:26 START
+idk STOP
 
+2026-05-11 01:12:38 START
+
+GOALS:
+
+WHAT TRAMS ARE DEPARTING NEXT X TIME
+-trip - route from start stop to the end stop
+-create for every stop some data structure for departing times
+-go through all trips of some tram and add all departing times to its stops
+
+DATA STRUCTURE FOR STOPS
 
