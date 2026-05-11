@@ -35,3 +35,9 @@ WHAT TRAMS ARE DEPARTING NEXT X TIME
 
 DATA STRUCTURE FOR STOPS
 
+
+TODO:
+
+CREATED stop_name_lon_lat to show stops on map - need to show them with javascript
+CREATED list named lines, where are coords of where i should draw lines on map
+- need to pass lines to javascript and show them
