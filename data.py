@@ -9,25 +9,23 @@ ROUTES_AND_ITS_STOP_IDS = "routes_and_its_stop_ids.csv"
 NUMBER_OF_TRAMS = 26
 
 stops = []
-routes = {}
-routes.update()
-tram_stops = {}
+routes = {} # route_id : [ all stops of route in format - stop_id, stop_name, lat, lon, direction]
+tram_stops = {} # stop_id : stop_name, lat, lon
 
 
 
 
-def get_route(number_of_route):
-    return routes["L"+str(number_of_route)]
+def get_route(number_of_route, direction):
+    return routes["L"+str(number_of_route)+"_"+str(direction)]
 
-def print_route(number_of_route):
-    print("L"+str(number_of_route), routes["L"+str(number_of_route)])
+def print_route(number_of_route, direction):
+    print("L"+str(number_of_route)+"_"+str(direction), routes["L"+str(number_of_route)+"_"+str(direction)])
 
 def find_stop(stop_id, stops):
     for i in range(len(stops)):
         if stops[i][0] == stop_id:
             return stops[i]
     return -1
-
 
 
 def iterate_stops_file(file):
@@ -60,16 +58,17 @@ def iterate_routes_file(file):
         direction = parts_of_line[1]
         route_id = parts_of_line[0]
 
+
         stop_info = find_stop(stop_id, stops)
 
         if stop_info == -1:
             print("not found")
         else:
 
-            if route_id in routes:
-                routes[route_id].append(stop_info + [direction])
+            if route_id+"_"+direction in routes:
+                routes[route_id+"_"+direction].append(stop_info + [direction])
             else:
-                routes[route_id] = [stop_info + [direction]]
+                routes[route_id+"_"+direction] = [stop_info + [direction]]
             update_tram_stops(stop_id, stop_info)
 
 with open(ROUTE, "r") as route_file, open(STOPS, "r") as stops_file:
@@ -121,24 +120,8 @@ def create_json_file(data, filename):
 
 
 
-create_json_file(tram_stops, "stop_name_lon_lat.json")
+create_json_file(tram_stops, "out/stops_information.json")
 
-lines = []
-
-for route in routes:
-
-    tram_route = routes[route]
-
-    for i in range(len(tram_route)):
-        tram_stop = tram_route[i]
-        if i > 0:
-
-            if tram_route[i-1][-1] == tram_stop[-1]:
-                id_of_first_stop = tram_route[i-1][0]
-                id_of_second_stop = tram_stop[0]
-                lat_of_first_stop = tram_stops[id_of_first_stop]["lat"]
-                lon_of_first_stop = tram_stops[id_of_first_stop]["lon"]
-                lat_of_second_stop = tram_stops[id_of_second_stop]["lat"]
-                lon_of_second_stop = tram_stops[id_of_second_stop]["lon"]
-                lines.append([lon_of_first_stop, lat_of_first_stop, lon_of_second_stop, lat_of_second_stop])
-print(tram_stops)
+create_json_file(routes, "out/routes.json")
+print(routes)
+#print(routes)
