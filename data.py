@@ -80,6 +80,14 @@ with open(ROUTE, "r") as route_file, open(STOPS, "r") as stops_file:
     stops_file.close()
 
 stop_times = {}
+pole = []
+previous_trip_id = None
+previous_stop_id = None
+
+trips = {}
+
+brake = False
+
 
 with open(STOP_TIMES, "r") as stop_times_file:
 
@@ -100,17 +108,60 @@ with open(STOP_TIMES, "r") as stop_times_file:
 
         route_number = trip_id.split("_")[0]
 
+        if previous_trip_id != None and previous_trip_id != trip_id:
+            for i in range(len(pole)):
+                pole[i].append(previous_stop_id)
+                stop_id_to_add = pole[i][0]
+                arr_time_to_add = pole[i][1]
+                route_number_to_add = pole[i][2]
+                trip_id_to_add = pole[i][3]
+                terminus = pole[i][4]
+                if stop_id_to_add not in stop_times:
+                    stop_times.update({stop_id_to_add:set()})
+                stop_times[stop_id_to_add].add((arr_time_to_add, route_number_to_add, terminus, trip_id_to_add))
 
-        if stop_id not in stop_times:
-            stop_times.update({stop_id:set()})
+                if trip_id_to_add not in trips:
+                    trips.update({trip_id_to_add:[]})
+                trips[trip_id_to_add].append([stop_id_to_add, arr_time_to_add])
+                brake = True
+            pole = []
+
+            
+
+        #if stop_id not in stop_times:
+            #stop_times.update({stop_id:set()})
         
-        stop_times[stop_id].add((arr_time, route_number))
+        #stop_times[stop_id].add((arr_time, route_number))
+        pole.append([stop_id, arr_time, route_number, trip_id])
+
+        previous_stop_id = stop_id
+        previous_trip_id = trip_id
+
+
+    print(stop_id)
+    for i in range(len(pole)):
+        pole[i].append(stop_id)
+        stop_id_to_add = pole[i][0]
+        arr_time_to_add = pole[i][2]
+        route_number_to_add = pole[i][1]
+        trip_id_to_add = pole[i][3]
+        terminus = pole[i][4]
+        if stop_id_to_add not in stop_times:
+            stop_times.update({stop_id_to_add:set()})
+        stop_times[stop_id_to_add].add((arr_time_to_add, route_number_to_add, terminus, trip_id_to_add))
+        
+        if trip_id_to_add not in trips:
+            trips.update({trip_id_to_add:[]})
+        trips[trip_id_to_add].append([stop_id_to_add, arr_time_to_add])
+    pole = []
 
     stop_times_file.close()
 
 
+
 for stop_id in stop_times:
     stop_times[stop_id] = sorted(stop_times[stop_id])
+
 
 
 
@@ -155,6 +206,9 @@ def create_json_file(data, filename):
 
 delete_data_in_file("out/stop_times.json")
 create_json_file(stop_times, "out/stop_times.json")
+
+delete_data_in_file("out/trips.json")
+create_json_file(trips, "out/trips.json")
 
 #create_json_file(tram_stops, "out/stops_information.json")
 
