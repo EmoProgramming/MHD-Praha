@@ -16,28 +16,29 @@
 
     <main>
         <div id="map"></div>
-        <form action="update.php" method="POST">
-        <select id="hours">
-        </select>
-        <select id="minutes">
-        </select>
-
-            <label for="stop_name">Choose route:</label><br>
-
-            <select name="stop_name" id="stop_name">
-            
+        <div class="left">
+            <select id="hours">
+            </select>
+            <select id="minutes">
             </select>
 
-            <br><br>
+                <label for="stop_name">Choose route:</label><br>
 
-            <button type="button" onclick="show()">Show</button>
-        </form>
+                <select name="stop_name" id="stop_name">
+                
+                </select>
+
+                <br><br>
+
+                <button type="button" onclick="show()">Show</button>
+                <div id="departureList"></div>
+        </div>
     </main>
 
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
-    <script src="dep_arr.js?=v1"></script>
+    <script src="dep_arr.js?=v2"></script>
 
 </body>
 </html>

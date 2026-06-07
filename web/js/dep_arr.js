@@ -1,38 +1,36 @@
 
 
-fetch('stops_information.json')
-    .then(response => response.json())
-    .then(data => {
-        const select = document.getElementById('stop_name');
+function createSelect() {
+    const select = document.getElementById('stop_name');
 
-        let names = [];
+    let names = [];
 
-        Object.entries(data).forEach(([stop_id, stop]) => {
+    Object.entries(stops_information).forEach(([stop_id, stop]) => {
 
-            const name = stop.stop_name.replaceAll('"', '');
+        const name = stop.stop_name.replaceAll('"', '');
 
-            names.push([name, stop_id])
-        });
-
-
-        names.sort();
-       
-
-        for (let i = names.length - 1; i > 0; i--) {
-            if (names[i][0] == names[i-1][0]) {
-                names.splice(i, 1);
-            }
-        }
-
-        names.forEach(([name, stop]) => {
-            const option = document.createElement('option');
-
-            option.value = stop;
-            option.textContent = name;
-
-            select.appendChild(option);
-        });
+        names.push([name, stop_id])
     });
+
+
+    names.sort();
+    
+
+    for (let i = names.length - 1; i > 0; i--) {
+        if (names[i][0] == names[i-1][0]) {
+            names.splice(i, 1);
+        }
+    }
+
+    names.forEach(([name, stop]) => {
+        const option = document.createElement('option');
+
+        option.value = stop;
+        option.textContent = name;
+
+        select.appendChild(option);
+    });
+}
 
 
 function timer() {
@@ -58,9 +56,20 @@ function timer() {
 
 let times = [];
 
+let stops_information = null;
+
+
 async function loadData() {
+
+    const response1 = await fetch("stops_information.json");
+    stops_information = await response1.json();
+
+
+    createSelect();
+
     const response = await fetch('stop_times.json?v=' + Date.now());
     times = await response.json();
+
 }
 
 function minutesFromBeginning(hours, minutes) {
@@ -82,13 +91,14 @@ function getDepartures(stop_id , currentTimeHours, currentTimeMinutes) {
     for (let i = 0; i < times[stop_id].length; i++) {
         const time = times[stop_id][i][0];
         const route = times[stop_id][i][1];
+        const terminus = times[stop_id][i][2];
 
 
         const [hours, minutes, seconds] = formatTime(time);
         const departureMinutes = minutesFromBeginning(hours, minutes);
 
         if (departureMinutes > currentTime && number > 0) {
-            departures.push([time, route]);
+            departures.push([time, route, terminus]);
             number -= 1;
         }
     }
@@ -103,10 +113,17 @@ function show() {
 
     departures = getDepartures(stop_id, currentTimeHours, currentTimeMinutes);
     for (let i = 0; i < departures.length; i++) {
-        console.log(departures[i]);
+        console.log(departures[i][2]);
+        let name = stops_information[departures[i][2]].stop_name.replaceAll('"', '');
+        console.log(name);
+        const departuresElement = document.getElementById("departureList");
+        const departure = document.createElement("div");
+        departure.textContent = departures[i][0] + ", " + departures[i][1] + ", " + name;
+        departuresElement.appendChild(departure);
     }
 
 }
 
 timer();
 loadData();
+
