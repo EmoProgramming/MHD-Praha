@@ -3,8 +3,7 @@ import json
 
 ROUTE = "stops/route_stops.txt"
 STOPS = "stops/stops.txt"
-STOPS_NAME_LON_LAT = "stops_name_lon_lat.csv"
-ROUTES_AND_ITS_STOP_IDS = "routes_and_its_stop_ids.csv"
+STOP_TIMES = "stops/stop_times.txt"
 
 NUMBER_OF_TRAMS = 26
 
@@ -80,6 +79,42 @@ with open(ROUTE, "r") as route_file, open(STOPS, "r") as stops_file:
     route_file.close()
     stops_file.close()
 
+stop_times = {}
+
+with open(STOP_TIMES, "r") as stop_times_file:
+
+    for line in stop_times_file:
+
+        if not re.match("^([1-9]|1[0-9]|2[0-6]|34)_", line):
+            continue
+
+        
+
+        parts_of_line = line.split(",")
+
+        trip_id = parts_of_line[0]
+        arr_time = parts_of_line[1]
+        dep_time = parts_of_line[2]
+        stop_id = parts_of_line[3]
+
+
+        route_number = trip_id.split("_")[0]
+
+
+        if stop_id not in stop_times:
+            stop_times.update({stop_id:set()})
+        
+        stop_times[stop_id].add((arr_time, route_number))
+
+    stop_times_file.close()
+
+
+for stop_id in stop_times:
+    stop_times[stop_id] = sorted(stop_times[stop_id])
+
+
+
+
 def csv_file_header(header_line, file):
     header_line_string = ""
     for word in header_line:
@@ -118,10 +153,11 @@ def create_json_file(data, filename):
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False)
 
+delete_data_in_file("out/stop_times.json")
+create_json_file(stop_times, "out/stop_times.json")
 
+#create_json_file(tram_stops, "out/stops_information.json")
 
-create_json_file(tram_stops, "out/stops_information.json")
-
-create_json_file(routes, "out/routes.json")
-print(routes)
+#create_json_file(routes, "out/routes.json")
+#print(routes)
 #print(routes)

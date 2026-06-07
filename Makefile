@@ -12,6 +12,10 @@ upload-routes: out/routes.json
 upload-stops_information: stops/stops.txt 
 	scp out/stops_information.json granskye@u1-1.ms.mff.cuni.cz:/afs/ms/u/g/granskye/WWW
 
+upload-stop_times: stops/stops.txt
+	scp out/stop_times.json granskye@u1-1.ms.mff.cuni.cz:/afs/ms/u/g/granskye/WWW
+
+
 upload-js: web/script.js
 	scp web/script.js granskye@u1-1.ms.mff.cuni.cz:/afs/ms/u/g/granskye/WWW
 
@@ -25,4 +29,6 @@ upload-header: web/header.php
 	scp web/header.php granskye@u1-1.ms.mff.cuni.cz:/afs/ms/u/g/granskye/WWW
 
 synch:
-	rsync -av web/ granskye@u1-1.ms.mff.cuni.cz:/afs/ms/u/g/granskye/WWW/
+	rsync -av web/js/ web/css/ web/pages/ granskye@u1-1.ms.mff.cuni.cz:/afs/ms/u/g/granskye/WWW/
+
+
