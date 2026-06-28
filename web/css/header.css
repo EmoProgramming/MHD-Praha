@@ -17,7 +17,10 @@ header {
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1976d2;
+    color: #43b02a;
+    font-family: "Archivo Black", sans-serif;
+    font-size: 48px;
+    letter-spacing: 2px;
 }
 
 nav {
@@ -48,6 +51,6 @@ nav a {
 }
 
 nav a:hover {
-    background: #1976d2;
+    background: #43b02a;
     color: white;
 }

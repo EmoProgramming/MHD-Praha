@@ -1,21 +1,30 @@
-#map {
-    height: 80vh;
-    width: 50%;
-    border-radius: 10px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.archivo-black-regular {
-  font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #f5f7fa;
 }
 
 
 main {
     display: flex;
-
 }
 
+.left {
+    width: 50%;
+}
+
+#map {
+    height: 80vh;
+    width: 90%;
+    border-radius: 10px;
+    margin: auto;
+    border: solid 2px #43b02a;
+}
 
 .right {
     width: 50%;
@@ -25,7 +34,7 @@ main {
     font-size: 100px;
     font-weight: bolder;
     text-align: center;
-
+    margin: 10px;
 }
 
 #quiz {
@@ -34,9 +43,86 @@ main {
     align-items: center;
 }
 
+#quiz h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 200px;
+    color: #43b02a;
+    margin: 10px;
+    margin-bottom: 50px;
+}
+
 #quiz button {
-    margin: 50px 0px;
-    padding: 10px 20px;
+    background: #43b02a;
+    color: white;
+    border: none;
+    padding: 25px 60px;
+    font-size: 35px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(67, 176, 42, 0.3);
+    margin-bottom: 100px;
+}
+
+#quiz button:hover {
+    background: #389624;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(67, 176, 42, 0.4);
+}
+
+#quiz button:active {
+    transform: translateY(0);
+}
+
+#quiz input {
+    max-width: 400px;
+    padding: 16px 16px;
+    font-size: 30px;
+    border: 2px solid #d9d9d9;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+}
+
+#quiz input:focus {
+    border-color: #43b02a;
+    box-shadow: 0 0 0 4px rgba(67, 176, 42, 0.15);
+
+}
+
+#quiz .score {
+    font-family: "Bebas Neue", sans-serif;
+    color: #43b02a;
+    font-size: 50px;
+    letter-spacing: 2px;
+
+}
+
+#quiz .warning {
+    color: red;
+}
+
+#timer {
+    font-family: "Bebas Neue", sans-serif;
+    color: #43b02a;
+    font-size: 35px;
+    letter-spacing: 2px;
+
+}
+
+#rules {
+    width: 60%;
+    margin: auto;
+    text-align: justify;
+    hyphens: auto;
+
+}
+
+#rules h2 {
+    color: #43b02a;
 }
 
 .right h2 {
