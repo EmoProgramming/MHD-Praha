@@ -6,15 +6,17 @@ $data = file_exists($file)
     : [];
 
 // zoradenie (najvyššie score hore)
-usort($data, function($a, $b) {
-    return $b["score"] - $a["score"];
-});
+usort($data, fn($a, $b) =>
+    ($b["score"] <=> $a["score"])
+    ?: ($a["time"] <=> $b["time"])
+);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="header.css">
     <title>Leaderboard</title>
     <style>
         body {

@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="departures.css">
     <link rel="stylesheet" href="header.css">
 
     <link rel="stylesheet"
@@ -15,30 +15,38 @@
 <?php require 'header.php'; ?>
 
     <main>
-        <div id="map"></div>
         <div class="left">
-            <select id="hours">
-            </select>
-            <select id="minutes">
-            </select>
-
-                <label for="stop_name">Choose route:</label><br>
-
-                <select name="stop_name" id="stop_name">
-                
+            <h1>DEPARTURES</h1>
+            <div class="selects">
+                <select id="hours">
                 </select>
+                <select id="minutes">
+                </select>
+                <select id="day">
+                </select>
+            </div>
 
-                <br><br>
+            <div class="stop_select">
+                    <select name="stop_name" id="stop_name">
+                    </select>
+            </div>
 
-                <button type="button" onclick="show()">Show</button>
-                <div id="departureList"></div>
+            <div class="button">
+                <button id="show" type="button" onclick="show()">Show</button>
+            </div>
+            <table id="departureList">
+
+            </table>
+        </div>
+        <div class="right">
+            <div id="map"></div>
         </div>
     </main>
 
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
-    <script src="dep_arr.js?=v2"></script>
+    <script src="script.js?v=2"></script>
+    <script src="dep_arr.js?v=8"></script>
 
 </body>
 </html>

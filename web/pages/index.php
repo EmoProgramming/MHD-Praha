@@ -3,38 +3,44 @@
 <head>
 
     <meta charset="utf-8">
-    <link rel="stylesheet" href="main.css?v=2">
-    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="index.css?v=4">
+    <link rel="stylesheet" href="header.css?v=1">
 
     <link rel="stylesheet"
           href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
+    <?php  require 'font.php'; ?>
 </head>
 <body>
 
 <?php require 'header.php'; ?>
 
     <main>
-        <div id="map"></div>
-        <form action="update.php" method="POST">
-            <label for="route_number">Choose route:</label><br>
+        <div class="left">
+            <form action="update.php" method="POST">
+                <label for="route_number">CHOOSE ROUTE:</label><br>
 
-            <select name="route_number" id="route_number">
-                <option value="All"></option>
-                <?php
-                for ($i = 1; $i < 27; $i++) {
-                    if ($i == 14) {
-                        continue;
+                <select name="route_number" id="route_number">
+                    <option value="All"></option>
+                    <?php
+                    for ($i = 1; $i < 27; $i++) {
+                        if ($i == 14) {
+                            continue;
+                        }
+                        echo "<option value='$i'>$i</option>";
                     }
-                    echo "<option value='$i'>$i</option>";
-                }
-                ?>
-            </select>
+                    echo "<option value='34'>34</option>";
+                    ?>
+                </select>
 
-            <br><br>
+                <br><br>
 
-            <button type="button" onclick="update()">Update</button>
-        </form>
+                <button type="button" onclick="update()">Update</button>
+            </form>
+        </div>
+        <div class="right">
+            <div id="map"></div>
+        </div>
     </main>
 
     <script>
