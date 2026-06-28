@@ -43,3 +43,58 @@ CREATED list named lines, where are coords of where i should draw lines on map
 - need to pass lines to javascript and show them
 
 
+DEPARTURES AND ARRIVALS
+
+chcem zobrat subor stop_times.txt, presunut stop id na prve miesto, potom pre kazdu
+stop si napisat casy vsetkych odchodov + pridat ake je to cislo elektricky
+
+potom ked sa niekto spyta na cas a zastavku, staci najst zastavku a pozriet sa 
+co odtial odchadza
+
+
+TODO
+mam vypisanych prvych 20 odchodov zo zastavky
+neviem avsak kam idu, to treba zistit a pripisat
+doriesit polnocne casy, teda ak hladam odchody casov 24:00 apod
+
+OTAZKA
+ktore spoje vypisovat
+? najblizsich 10?
+? najblizsi od kazdej linky? co ak od nejakej linky pride az o 5 hodin ?
+? najblizsi od kazdej linky, ktory pride do 30 min ? 
+potom treba spat zmenit datove struktury
+
+Vyriesit kam trasa vedie, teda ked sa pozeram na danu linku kam ide
+posledna zastavka je vzdy v subore az dole, teda najprv prejdem vsetky 
+casy a pridam ich do externeho pola, az ked sa dostanem na koniec potom zistim aka
+je posledna zastavka a postupne popridavam
+
+
+
+TODO
+nejako divne mam stops information, nie su tam vsetky ale iba tie ktore som nasiel v routes asi??
+
+TODO
+leaderboard funguje zle, je zoradeny asi aj podla nickname, to by nemala byt priorita pri vysledkoch
+
+
+TODO
+prekopat cele data.py
+zle vyhladavam data, vytvaram zastavky iba zo suboru routes, tam su iba bezne trate, niekedy dana linka
+ide inou trasou napr. do vozovny
+teda by sa zislo prejst vsetky zastavky, na ktoru hocijaka elektricka pride
+
+Teda budeme mat vsetky zastavky uz urcite
+Dalej bude treba kazdej zo zastavok najst informacie aby som ju vedel vypisat
+Budem potrebovat stop_name, lat a lon
+Tie informacie najdem v subore stops.txt
+
+Postup:
+ako prve si zoradim zastavky ktore som nasiel, podla stop_id prveho cisla, ktore tam je v stringu
+potom subor stops.txt je zoradeny tiez taky, staci zlievat tieto 2 veci, teda pole a subor
+
+DONE
+
+TODO
+opravujem dep_arr.js, upravujem kod, naposledy nefungoval show() funkcia, pretoze som prerobil
+subory trips.json, stops.json, stop_times.json
