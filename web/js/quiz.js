@@ -6,6 +6,8 @@ let rightAnswer = true;
 let prev_number;
 let start = true;
 let number;
+let dataSaveMessage;
+let showDataSaveMessage = false;
 
 let seconds = 0;
 let timer;
@@ -53,7 +55,7 @@ function playingState() {
         }
 
         //console.log(number);
-        drawRoute("L" + number + "_1", data);
+        drawRoute("L" + number + "_1", routes);
         prev_number = number;
         
     } else {
@@ -73,7 +75,7 @@ function endOfQuiz() {
 }
 
 function showScore() {
-    return "<div>SCORE:" + score + "</div>";
+    return "<div class='score'>SCORE " + score + "</div>";
 }
 
 function showState(state) {
@@ -96,14 +98,48 @@ function showMessage() {
     return "<div>" + message + "</div>";
 }
 
+function showRules() {
+    const rules = document.getElementById("rules");
+
+    const h2 = document.createElement("h2");
+    h2.textContent = "RULES";
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = "There are 26 tram links in Prague and your goal is to guess correctly the most you can. At the end you can add your result to leaderboard. The result is based od number of correct guesses and time spent during quiz. Priority has correctnes.";
+
+    rules.appendChild(h2);
+    rules.appendChild(paragraph);
+}
+
+function hideRules() {
+    document.getElementById("rules").innerHTML = "";
+}
+
+function showWarning() {
+    const quiz = document.getElementById("quiz");
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = dataSaveMessage;
+    paragraph.classList.add("warning");
+
+    quiz.appendChild(paragraph);
+
+
+}
+
 function HTMLForIdle() {
     let buttonName = "Start";
     let onclickPar = `startGame()`;
     let state = "Quiz";
     quiz.innerHTML = showState(state) + showButton(onclickPar, buttonName);
+    if (showDataSaveMessage) {
+        showWarning();
+    }
+    showRules();
 }
 
 function HTMLForPlaying() {
+    hideRules();
     let onclickPar =  `checkRight(${number})`;
     let buttonName = "Next";
     let state = "Playing";
@@ -115,10 +151,10 @@ function HTMLForPlaying() {
 function HTMLForEnd() {
     let buttonName = "Play Again";
     let onclickPar = `restart()`;
-    let forInput = "nickname"
-    quiz.innerHTML = showState("End Of Game") + showButton(onclickPar, buttonName) + "<br>"
-    + showInput(forInput, forInput, forInput) +
-    showButton(`saveData()`, "Save Score And Restart") + showScore();
+    let placeholder = "Enter nickname"
+    let forInput = "nickname";
+    quiz.innerHTML = showState("End Of Game") + showInput(placeholder, forInput, forInput) +
+    showButton(`saveData()`, "Save Score And Restart")+ "<br>" + showScore();
    
 }
 
@@ -188,10 +224,12 @@ function saveData() {
                 nickname: nickname
             })
         });
+        dataSaveMessage = "Result was saved. Check https://www.ms.mff.cuni.cz/~granskye/leaderboard.php"
     } else {
-        let message = "Only score higher than 0 is saved. Sorry :("
-        quiz.innerHTML += showMessage(message);
+        dataSaveMessage = "Only score higher than 0 is saved. Sorry :("
+        
     }
+    showDataSaveMessage = true;
 
     restart();
 }
