@@ -229,12 +229,12 @@ function show() {
                 const tbody = document.querySelector("#departureList tbody");
 
         tbody.innerHTML += `
-            <tr>
+            <tr onclick="window.location.href='https://www.ms.mff.cuni.cz/~granskye/mhdprague/trip.php?trip_id=${trip_id}'" style="cursor: pointer;">
                 <td>${stopNumber}</td>
                 <td>${departures[i][0]}</td>
                 <td>${lastStop}</td>
             </tr>
-        `;
+                `;
 
 
     }
@@ -285,12 +285,12 @@ function showFromMap(stop_id) {
         const tbody = document.querySelector("#departureList tbody");
 
         tbody.innerHTML += `
-            <tr>
-                <td>${stopNumber}</td>
-                <td>${departures[i][0]}</td>
-                <td>${lastStop}</td>
-            </tr>
-        `;
+        <tr onclick="window.location.href='https://www.ms.mff.cuni.cz/~granskye/mhdprague/trip.php?trip_id=${trip_id}'" style="cursor: pointer;">
+            <td>${stopNumber}</td>
+            <td>${departures[i][0]}</td>
+            <td>${lastStop}</td>
+        </tr>
+            `;
 
 
 
