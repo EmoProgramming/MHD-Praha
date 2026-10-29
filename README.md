@@ -33,8 +33,8 @@ The original GTFS data is processed using Python scripts and converted into JSON
 
 For more detailed information, see the following documents:
 
-- [User Documentation](docs/USER_DOCUMENTATION.md) – Instructions for using the application's features.
-- [Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md) – Description of the data processing pipeline, JSON file structures, and JavaScript application logic.
+- [User Documentation](docs/userDocumentation.md) – Instructions for using the application's features.
+- [Technical Documentation](docs/technicalDocumentation.md) – Description of the data processing pipeline, JSON file structures, and JavaScript application logic.
 
 ## Live Application Pages
 
