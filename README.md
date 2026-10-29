@@ -1,38 +1,48 @@
-# User Documentation
+# MHD Prague
 
-**MHD PRAGUE** is a web application designed to display tram routes on a map and search for tram departures from the platforms of any tram stop at any given time. It also allows users to test their knowledge of Prague's tram routes through a quiz.
+MHD Prague is a web application for exploring Prague's tram network. It allows users to visualize tram routes on an interactive map, find upcoming departures from tram stops, and test their knowledge of Prague's tram lines through an interactive quiz.
 
-The application is available in a web browser at the following URL:
+## Live Demo
 
-https://www.ms.mff.cuni.cz/~granskye/mhdprague/index.php
+[Open MHD Prague](https://www.ms.mff.cuni.cz/~granskye/mhdprague/index.php)
 
-The application consists of three main sections:
+## Features
 
-## 1. Home
+- **Interactive Map** – Display tram routes and explore individual stops using Leaflet.
+- **Tram Departures** – Find upcoming tram departures based on a selected date, time, and stop or platform.
+- **Tram Quiz** – Test your knowledge of Prague's tram routes by guessing tram line numbers.
+- **Leaderboard** – Compare quiz scores with other players.
 
-On the Home page, users can select any tram line. After clicking the **Update** button, the route of the selected line is displayed on the map. Users can view the names of individual stops by clicking on any stop displayed on the map.
+## Technologies Used
 
-## 2. Quiz
+- **Python** – Processing and filtering public transport data.
+- **JavaScript** – Client-side application logic and data retrieval.
+- **Leaflet** – Interactive map rendering.
+- **JSON** – Storing and providing processed transport data.
+- **PID GTFS** – Source of public transport schedule and route data.
 
-On the Quiz page, users can play a quiz about Prague's tram routes. The rules are provided at the bottom of the page.
+## Data Source
 
-The quiz starts when the user clicks the **Start** button. A random tram line is selected, and its route is displayed on the map. The user's task is to guess the number of the tram line corresponding to the displayed route.
+The application uses public transport data provided by Prague Integrated Transport (PID).
 
-This process continues until all of Prague's tram lines have been shown. At the end of the quiz, users who have scored at least one point can submit their results to the leaderboard, which is displayed on the **Leaderboard** page.
+[PID Open Data](https://pid.cz/en/opendata/)
 
-The goal is to achieve the highest possible score by correctly identifying as many tram routes as possible in the shortest amount of time.
+The original GTFS data is processed using Python scripts and converted into JSON files consumed by the web application.
 
-## 3. Departures
+## Documentation
 
-On the Departures page, users can select a specific travel date and time for any day of the week, from Monday to Sunday.
+For more detailed information, see the following documents:
 
-Users can select a tram stop in two ways:
+- [User Documentation](docs/USER_DOCUMENTATION.md) – Instructions for using the application's features.
+- [Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md) – Description of the data processing pipeline, JSON file structures, and JavaScript application logic.
 
-- **Using the stop selection menu:** Users can select a stop from the list of all tram stops. After clicking the **Show** button, the next 10 tram departures from the selected stop at the specified time are displayed.
-- **Using the map:** Users can click on a specific platform at a tram stop directly on the map to view departures from that platform.
+## Live Application Pages
 
-The difference between these two methods is that selecting a stop from the menu displays departures from all platforms at that stop, whereas clicking on a specific platform on the map displays only departures from that particular platform.
+- [Home](https://www.ms.mff.cuni.cz/~granskye/mhdprague/index.php)
+- [Departures](https://www.ms.mff.cuni.cz/~granskye/mhdprague/departures_arrivals.php)
+- [Quiz](https://www.ms.mff.cuni.cz/~granskye/mhdprague/quiz.php)
+- [Leaderboard](https://www.ms.mff.cuni.cz/~granskye/mhdprague/leaderboard.php)
 
-The map-based selection is available only after the user has selected a specific date and time.
+## AI Assistance
 
-When opening the Departures page for the first time, users must wait for the data to load from the server.
+ChatGPT was used to translate the project documentation into English and to create this README file.
